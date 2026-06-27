@@ -25,6 +25,7 @@ import AIConsultant from './components/AIConsultant';
 import AdminDashboard from './components/AdminDashboard';
 import HealthAnalytics from './components/HealthAnalytics';
 import HomecareChat from './components/HomecareChat';
+import { Logo1, Logo2 } from './components/MyDoctorLogo';
 
 export default function App() {
   const [language, setLanguage] = useState<Language>('th');
@@ -269,14 +270,9 @@ export default function App() {
           
           {/* Brand Logo & Royal Title */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-teal-950 flex items-center justify-center border border-amber-500/30">
-              <span className="font-serif font-black text-xl text-amber-500 tracking-tighter">m</span>
-            </div>
-            <div>
-              <h1 className="text-xl font-bold tracking-tight text-teal-950 flex items-center gap-1">
-                {t.appName}
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-              </h1>
+            <Logo1 />
+            <div className="hidden lg:block border-l border-slate-200 h-8 self-center mx-1" />
+            <div className="hidden lg:block">
               <span className="text-[9px] font-mono font-bold text-amber-600 tracking-widest block uppercase mt-0.5">
                 {t.appSub}
               </span>
@@ -444,7 +440,8 @@ export default function App() {
 
         {/* Security / Decryptor Sign In Barrier */}
         {!user ? (
-          <div className="py-12 flex flex-col items-center">
+          <div className="py-8 flex flex-col items-center gap-6">
+            <Logo2 />
             <BiometricLogin language={language} onLoginSuccess={handleLoginSuccess} />
           </div>
         ) : (
@@ -618,6 +615,17 @@ export default function App() {
 
                   {/* Dynamic render of active grids */}
                   <div className="pt-2">
+                    {activeGridModule === null && (
+                      <div className="bg-white border border-slate-100 p-10 rounded-3xl shadow-xs text-center flex flex-col items-center justify-center space-y-4">
+                        <Logo2 />
+                        <p className="text-xs font-semibold text-slate-500 leading-normal max-w-md">
+                          {language === 'th' 
+                            ? 'กรุณาเลือกโมดูลระบบพยาบาลในโครงข่ายหลักเพื่อเริ่มดำเนินงานด้านคลินิก' 
+                            : 'Please select a clinical grid system module above to launch sub-system operations.'}
+                        </p>
+                      </div>
+                    )}
+
                     {activeGridModule === 1 && (
                       <div className="bg-white border border-slate-100 p-6 rounded-3xl shadow-lg space-y-4">
                         <div className="flex justify-between items-center border-b border-slate-100 pb-3">
